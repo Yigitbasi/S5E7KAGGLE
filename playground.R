@@ -1,54 +1,6 @@
-traindata<-read.csv("C:\\Users\\mefis\\Downloads\\playground-series-s5e7\\train.csv")
-testdata<-read.csv("C:\\Users\\mefis\\Downloads\\playground-series-s5e7\\test.csv")
-traindata
-#View(traindata)
-#View(testdata)
-summary(traindata)
-unique(traindata$Stage_fear)
-trainid<-traindata$id
-traindata<-traindata[2:9]
-head(traindata) #ilk 5 sütun
-traindata$Stage_fear[traindata$Stage_fear==""]<-NA #Boş stringler eksik veri oldu
-
-# Sayısal ve kategorik değişkenleri ayırma
-numeric_vars <- names(traindata)[sapply(traindata, is.numeric)]
-categorical_vars <- names(traindata)[sapply(traindata, is.character) | sapply(traindata, is.factor)] #Hem karakter hem de factor tipindekiler
-
-print("Sayısal Degiskenler:")
-print(numeric_vars)
-
-print("Kategorik Degiskenler:")
-print(categorical_vars)
-
-
-for (i in 1:ncol(traindata)) {
-  print(paste(colnames(traindata[i]),sum(is.na(traindata[i]))))
-}
-for (i in 1:ncol(traindata)) {
-  print(names(traindata[i]))
-  print(unique(traindata[[i]]))
-}
-
-for (var in numeric_vars){
-  traindata[[var]][is.na(traindata[[var]])]<-mean(traindata[[var]], na.rm = TRUE) 
-}
-
-for (var in categorical_vars) {
-  mode_val<-names(sort(table(traindata[[var]]),decreasing = TRUE))[1]
-  traindata[[var]][is.na(traindata[var])]<-mode_val
-}
-
-boxplot(traindata$Time_spent_Alone)
-outliertimespent<-boxplot.stats(traindata$Time_spent_Alone)$out
-medianimespent<-median(traindata$Time_spent_Alone)
-traindata$Time_spent_Alone[traindata$Time_spent_Alone %in% outliertimespent] <- medianimespent
-boxplot(traindata[,numeric_vars])
-
-############################
-
 # Veriyi okuma
-traindata<-read.csv("C:\\Users\\mefis\\Downloads\\playground-series-s5e7\\train.csv")
-testdata<-read.csv("C:\\Users\\mefis\\Downloads\\playground-series-s5e7\\test.csv")
+traindata<-read.csv("C:\\train.csv")
+testdata<-read.csv("C:\\test.csv")
 
 # Veriyi hazırlama (Eksik değerleri doldurma, aykırı değerleri ele alma vb.)
 trainid<-traindata$id
