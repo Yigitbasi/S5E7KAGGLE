@@ -15,5 +15,3 @@ Model Eğitimi: nnet paketi kullanılarak çok terimli lojistik regresyon modeli
 Tahmin: Test veri kümesi için kişilik tiplerini tahmin eder.
 
 Gönderim Dosyası Oluşturma: Tahmin edilen kişilik tiplerini içeren bir gönderim dosyası (submission.csv) oluşturur.
-
-nnet kütüphanesinden multinomiyal lojistik regresyon kullanılmıştır.
